@@ -1,0 +1,42 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+yes.
+-no.
+
+%bear AA Aa aa.
+AA(P1).
+Aa(P3).
+bear(P1,P2,P3).
+
+bear(x,y,z)->bear(y,x,z).
+-AA(x)<->Aa(x)|aa(X).
+-Aa(x)<->AA(x)|aa(X).
+-aa(x)<->AA(x)|Aa(X).
+
+bear(x,y,z) & AA(x) & AA(y) -> AA(z).
+bear(x,y,z) & AA(x) & Aa(y) -> AA(z)|Aa(z).
+bear(x,y,z) & AA(x) & aa(y) -> Aa(z).
+bear(x,y,z) & Aa(x) & Aa(y) -> yes.
+bear(x,y,z) & Aa(x) & aa(y) -> Aa(z)|aa(z).
+bear(x,y,z) & aa(x) & aa(y) -> aa(z).
+
+end_of_list.
+
+formulas(goals).
+
+-AA(P2).
+
+end_of_list.
+
